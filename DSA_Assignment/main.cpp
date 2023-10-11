@@ -37,14 +37,17 @@ void simulate(string filename, imp_res* r)
 		}
     	else if(str == "UNLIMITED_VOID") // UNLIMITED_VOID
      	{   	
+				cout << "VOID------" << endl;
     			r->UNLIMITED_VOID();
     	}
     	else if(str == "DOMAIN_EXPANSION") // DOMAIN_EXPANSION
     	{
+				cout << "DOMAIN------" << endl;
     			r->DOMAIN_EXPANSION();
     	}
     	else // LIGHT <NUM>
     	{
+				cout << "LIGHT------" << endl;;
                 ss >> num;
     			r->LIGHT(stoi(num));
     	}
@@ -55,8 +58,9 @@ int check(string fileOUT, string fileS_OUT) {
 	ifstream out(fileOUT);
 	ifstream s_out(fileS_OUT);
 	string st, tt;
-	int i=1;
+	int i=0;
 	while( (s_out >> st) && (out >> tt)) {
+		if( (st[0]<='Z' && st[0]>='A') || (st[0]<='z' && st[0]>='a') ) i++;
 		if(tt=="TIME:") {
 			double tm;
 			out >> tm;
@@ -64,7 +68,6 @@ int check(string fileOUT, string fileS_OUT) {
 			else return -1;
 		}
 		else if(st!=tt) return i;
-		i++;
 	}
 	return i;
 }
@@ -101,7 +104,7 @@ int main(int argc, char* argv[]) {
 			cout << "TEST " << i << " : " << "DIFFER AT LINE " << ck << endl;
 			return 0;
 		}
-	}
+	 }
 
 	
 	return 0;
